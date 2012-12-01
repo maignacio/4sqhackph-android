@@ -1,8 +1,12 @@
 package com.poweroflove.anomeron.activity;
 
+import java.util.List;
+
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -15,11 +19,12 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.poweroflove.anomeron.R;
 import com.poweroflove.anomeron.adapter.EntryArrayAdapter;
+import com.poweroflove.anomeron.adapter.EntryArrayAdapter.EntryArrayAdapterActionListener;
 import com.poweroflove.anomeron.model.Entry;
 import com.poweroflove.anomeron.service.AnoMeronService;
 
 public class MainActivity extends SherlockListActivity implements
-		ActionBar.OnNavigationListener {
+		ActionBar.OnNavigationListener, EntryArrayAdapterActionListener {
 
 	private String[] mLocations = { "Nearby", "The Podium" };
 
@@ -27,6 +32,26 @@ public class MainActivity extends SherlockListActivity implements
 
 	private boolean mIsBound;
 	private AnoMeronService mBoundService;
+	
+	private List<Entry> mEntries;
+	
+	private BroadcastReceiver mBr = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context arg0, Intent arg1) {
+			String action = arg1.getAction();
+			
+			if(action.equals("refresh feed")) {
+				System.out.println("refresh");
+				mEntries.clear();
+				mEntries.addAll(Entry.getEntries());
+				System.out.println(mEntries);
+				mAdapter.notifyDataSetChanged();
+			}
+		}
+		
+	};
+	
 
 	private ServiceConnection mConnection = new ServiceConnection() {
 		public void onServiceConnected(ComponentName className, IBinder service) {
@@ -60,9 +85,15 @@ public class MainActivity extends SherlockListActivity implements
 		mActionBar.setListNavigationCallbacks(list, this);
 
 		mLv = getListView();
+		mEntries = Entry.getEntries();
 		mAdapter = new EntryArrayAdapter(getApplicationContext(), 0,
-				Entry.getEntries());
+				mEntries);
+		mAdapter.mListener = this;
 		mLv.setAdapter(mAdapter);
+		
+		IntentFilter filter = new IntentFilter();
+		filter.addAction("refresh feed");
+		registerReceiver(mBr, filter);
 	}
 
 	@Override
@@ -70,6 +101,7 @@ public class MainActivity extends SherlockListActivity implements
 		super.onDestroy();
 
 		doUnbindService();
+		unregisterReceiver(mBr);
 	}
 
 	@Override
@@ -106,6 +138,13 @@ public class MainActivity extends SherlockListActivity implements
 			unbindService(mConnection);
 			mIsBound = false;
 		}
+	}
+
+	@Override
+	public void onItemSelected(long id) {
+		Intent i = new Intent(MainActivity.this, DetailsActivity.class);
+		i.putExtra("id", id);
+		startActivity(i);
 	}
 
 }

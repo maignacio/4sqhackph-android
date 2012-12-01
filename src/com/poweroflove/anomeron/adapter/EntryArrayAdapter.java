@@ -5,16 +5,20 @@ import httpimage.HttpImageManager;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.poweroflove.anomeron.R;
+import com.poweroflove.anomeron.activity.DetailsActivity;
+import com.poweroflove.anomeron.activity.MainActivity;
 import com.poweroflove.anomeron.model.Entry;
 
 public class EntryArrayAdapter extends ArrayAdapter<Entry> {
@@ -22,6 +26,8 @@ public class EntryArrayAdapter extends ArrayAdapter<Entry> {
 	private List<Entry> mItems;
 	private LayoutInflater inflater;
 	private HttpImageManager mHttpImageManager;
+	
+	public EntryArrayAdapterActionListener mListener = null;
 
 	public EntryArrayAdapter(Context context, int textViewResourceId,
 			List<Entry> items) {
@@ -37,7 +43,8 @@ public class EntryArrayAdapter extends ArrayAdapter<Entry> {
 	
 	@Override
 	  public View getView(int position, View convertView, ViewGroup parent) {
-	    Entry item = mItems.get(position);
+	    final int pos = position;
+		final Entry item = mItems.get(position);
 		
 		View rowView = convertView;
 	    ViewHolder viewHolder;
@@ -84,9 +91,22 @@ public class EntryArrayAdapter extends ArrayAdapter<Entry> {
 	    else {
 	    	uploadedImage.setVisibility(View.GONE);
 	    }
+	    rowView.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View arg0) {
+				if(mListener != null) {
+					mListener.onItemSelected(item.getId());
+				}
+			}
+	    	
+	    });
 	    return rowView;
 	  }
+	
+	public interface EntryArrayAdapterActionListener {
+		public void onItemSelected(long id);
+	}
 
 	static class ViewHolder {
 		private TextView mUser, mLocation, mBody, mTimestamp;

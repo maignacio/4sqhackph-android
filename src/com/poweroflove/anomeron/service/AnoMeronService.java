@@ -2,8 +2,6 @@ package com.poweroflove.anomeron.service;
 
 import java.util.List;
 
-import com.poweroflove.anomeron.model.Entry;
-
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +10,12 @@ import android.location.LocationManager;
 import android.os.Binder;
 import android.os.IBinder;
 
+import com.poweroflove.anomeron.util.HttpUtil;
+
 public class AnoMeronService extends Service {
+	
+	private double nLong = 121.018379331;
+	private double nLat = 14.5590258956;
 
 	private LocationManager mLocMgr = null;
 
@@ -48,6 +51,9 @@ public class AnoMeronService extends Service {
 		entry.location = "Happy Town";
 		entry.userThumbUri = "https://twimg0-a.akamaihd.net/profile_images/2739187536/b8eff7c27419d4bd8a09286b561285d1_normal.jpeg";
 		entry.save();*/
+		
+		Location loc = getLocation();
+		HttpUtil.getFeeds(getApplicationContext(), nLong + "", nLat + "");
 	}
 
 	public Location getLocation() {

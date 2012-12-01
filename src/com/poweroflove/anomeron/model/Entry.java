@@ -1,5 +1,6 @@
 package com.poweroflove.anomeron.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.activeandroid.Model;
@@ -30,6 +31,16 @@ public class Entry extends Model {
 	
 	@Column(name = "UserThumbURI")
 	public String userThumbUri;
+	
+	@Column(name = "StartTime")
+	public Date startTime;
+	
+	@Column(name = "EndTime")
+	public Date endTime;
+	
+	public static Entry getEntryFromId(long id) {
+		return Entry.load(Entry.class, id);
+	}
 	
 	public static List<Entry> getEntries() {
 		return new Select().from(Entry.class).execute();
