@@ -61,7 +61,8 @@ public class EntryArrayAdapter extends ArrayAdapter<Entry> {
 	    TextView user = viewHolder.getUsernameTextView();
 	    TextView location = viewHolder.getLocationTextView();
 	    TextView body = viewHolder.getMessageBodyTextView();
-	    TextView timestamp = viewHolder.getTimestampTextView();
+	    TextView start = viewHolder.getStartTimestampTextView();
+	    TextView end = viewHolder.getEndTimestampTextView();
 	    ImageView userThumb = viewHolder.getUserThumbnailImageView();
 	    ImageView uploadedImage = viewHolder.getUploadedImageView();
 	    
@@ -69,6 +70,8 @@ public class EntryArrayAdapter extends ArrayAdapter<Entry> {
 	    location.setText("at " + item.location);
 	    body.setText(item.body);
 	    //timestamp.setText("on " + item.timestamp);
+	    
+	    
 	    
 	    String thumbUri = item.userThumbUri;
 	    
@@ -109,14 +112,15 @@ public class EntryArrayAdapter extends ArrayAdapter<Entry> {
 	}
 
 	static class ViewHolder {
-		private TextView mUser, mLocation, mBody, mTimestamp;
+		private TextView mUser, mLocation, mBody, mStartTimestamp, mEndTimestamp;
 		private ImageView mUserThumb, mUploadedImage;
 		
 		public ViewHolder(View v) {
 			mUser = (TextView) v.findViewById(R.id.username);
 			mLocation = (TextView) v.findViewById(R.id.location);
 			mBody = (TextView) v.findViewById(R.id.message);
-			//mTimestamp = (TextView) v.findViewById(R.id.timestamp);
+			mStartTimestamp = (TextView) v.findViewById(R.id.start_timestamp);
+			mEndTimestamp = (TextView) v.findViewById(R.id.end_timestamp);
 			mUserThumb = (ImageView) v.findViewById(R.id.user_thumb);
 			mUploadedImage = (ImageView) v.findViewById(R.id.uploaded_image);
 		}
@@ -133,8 +137,11 @@ public class EntryArrayAdapter extends ArrayAdapter<Entry> {
 			return mBody;
 		}
 		
-		public TextView getTimestampTextView() {
-			return mTimestamp;
+		public TextView getStartTimestampTextView() {
+			return mStartTimestamp;
+		}
+		public TextView getEndTimestampTextView() {
+			return mEndTimestamp;
 		}
 		
 		public ImageView getUserThumbnailImageView() {

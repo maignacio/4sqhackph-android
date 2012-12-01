@@ -100,8 +100,17 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/upvote"
                 android:layout_alignLeft="@+id/user_thumb_border"
-                android:text="September 8, 1987 12:39PM"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignRight="@+id/downvote"
+                android:layout_below="@+id/timestamp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/map" />
         </RelativeLayout>
     </ScrollView>
 
