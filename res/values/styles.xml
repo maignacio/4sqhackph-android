@@ -1,20 +1,104 @@
-<resources>
-
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
-    </style>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    <style name="AnoMeronTheme" parent="Theme.Sherlock.Light.DarkActionBar">
+        <item name="android:windowBackground">@drawable/bg</item>
+        <item name="actionBarItemBackground">@drawable/selectable_background_anomeron</item>
+        <item name="popupMenuStyle">@style/anomeron_PopupMenu</item>
+        <item name="dropDownListViewStyle">@style/anomeron_DropDownListView</item>
+        <item name="actionBarTabStyle">@style/anomeron_ActionBarTabStyle</item>
+        <item name="actionDropDownStyle">@style/anomeron_DropDownNav</item>
+        <item name="actionBarStyle">@style/anomeron_solid_ActionBar</item>
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_anomeron</item>
+        <item name="android:popupMenuStyle">@style/anomeron_PopupMenu</item>
+        <item name="android:dropDownListViewStyle">@style/anomeron_DropDownListView</item>
+        <item name="android:actionBarTabStyle">@style/anomeron_ActionBarTabStyle</item>
+        <item name="android:actionDropDownStyle">@style/anomeron_DropDownNav</item>
+        <item name="android:actionBarStyle">@style/anomeron_solid_ActionBar</item>
+        <item name="android:panelBackground">@drawable/menu_hardkey_panel_anomeron</item>
+
+        <!-- Light.DarkActionBar specific -->
+        <item name="actionBarWidgetTheme">@style/Theme.anomeron.widget</item>
+        <item name="android:actionBarWidgetTheme">@style/Theme.anomeron.widget</item>
+    </style>
+
+    <style name="entry_user_style">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="entry_location_style">
+        <item name="android:textColor">@color/translucent</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+    
+	<style name="entry_timestamp_style">
+        <item name="android:textColor">@color/translucent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">10dp</item>
+        
+    </style>
+    
+    <style name="entry_action_button_style">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColor">@color/translucent</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textAllCaps">true</item>  
+        <item name="android:layout_height">15dp</item>      
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <style name="CustomTitlePageIndicator">
+        <item name="android:background">@color/gray</item>
+    </style>
+
+    <style name="anomeron_solid_ActionBar" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_anomeron</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_anomeron</item>
+        <item name="progressBarStyle">@style/anomeron_ProgressBar</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_anomeron</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_anomeron</item>
+        <item name="android:progressBarStyle">@style/anomeron_ProgressBar</item>
+    </style>
+
+    <style name="anomeron_transparent_ActionBar" parent="@style/Widget.Sherlock.ActionBar">
+        <item name="background">@drawable/ab_transparent_anomeron</item>
+        <item name="progressBarStyle">@style/anomeron_ProgressBar</item>
+        <item name="android:background">@drawable/ab_transparent_anomeron</item>
+        <item name="android:progressBarStyle">@style/anomeron_ProgressBar</item>
+    </style>
+
+    <style name="anomeron_PopupMenu" parent="@style/Widget.Sherlock.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_anomeron</item>
+    </style>
+
+    <style name="anomeron_DropDownListView" parent="@style/Widget.Sherlock.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_anomeron</item>
+    </style>
+
+    <style name="anomeron_ActionBarTabStyle" parent="@style/Widget.Sherlock.ActionBar.TabView">
+        <item name="background">@drawable/tab_indicator_ab_anomeron</item>
+        <item name="android:background">@drawable/tab_indicator_ab_anomeron</item>
+    </style>
+
+    <style name="anomeron_DropDownNav" parent="@style/Widget.Sherlock.Spinner.DropDown.ActionBar">
+        <item name="background">@drawable/spinner_background_ab_anomeron</item>
+        <item name="android:background">@drawable/spinner_background_ab_anomeron</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_anomeron</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_anomeron</item>
+    </style>
+
+    <style name="anomeron_ProgressBar" parent="@style/Widget.Sherlock.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_anomeron</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.anomeron.widget" parent="@style/Theme.Sherlock">
+        <item name="popupMenuStyle">@style/anomeron_PopupMenu</item>
+        <item name="dropDownListViewStyle">@style/anomeron_DropDownListView</item>
+        <item name="android:popupMenuStyle">@style/anomeron_PopupMenu</item>
+        <item name="android:dropDownListViewStyle">@style/anomeron_DropDownListView</item>
     </style>
 
 </resources>

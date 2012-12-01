@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/list_bg"
+    android:paddingBottom="15dp" >
+
+    <ImageView
+        android:id="@+id/uploaded_image"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:id="@+id/user_thumb_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/username"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-25dp"
+        android:background="@drawable/list_bg"
+        android:orientation="vertical"
+        android:paddingBottom="12dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="11dp" >
+
+        <ImageView
+            android:id="@+id/user_thumb"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/username"
+        style="@style/entry_user_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uploaded_image"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/user_thumb_border"
+        android:text="M A Ignacio" />
+
+    <TextView
+        android:id="@+id/location"
+        style="@style/entry_location_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/username"
+        android:layout_below="@+id/username"
+        android:text="at Chikka Philippines, Inc." />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/location"
+        android:layout_below="@+id/location"
+        android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat."
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <ImageButton
+        android:id="@+id/downvote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/message"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_action_downvote" />
+
+    <ImageButton
+        android:id="@+id/upvote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message"
+        android:layout_toLeftOf="@+id/downvote"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_action_upvote" />
+
+    <TextView
+        android:id="@+id/timestamp"
+        style="@style/entry_timestamp_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/upvote"
+        android:layout_alignLeft="@+id/user_thumb_border"
+        android:text="September 8, 1987 12:39PM"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>
