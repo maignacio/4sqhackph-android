@@ -34,6 +34,7 @@
         </activity>
         
         <activity android:name=".activity.DetailsActivity"></activity>
+        <activity android:name=".activity.SearchActivity"></activity>
 
         <service
             android:name=".service.AnoMeronService"

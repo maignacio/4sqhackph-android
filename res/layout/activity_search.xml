@@ -2,16 +2,26 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="Search place" >
+
+        <requestFocus />
+    </EditText>
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:divider="@color/transparent"
-        android:dividerHeight="0dp" >
+        android:layout_below="@+id/search" >
     </ListView>
-
+    
     <LinearLayout
         android:id="@+id/empty"
         android:layout_width="fill_parent"
@@ -20,7 +30,8 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="20dp" >
+        android:padding="20dp"
+        android:visibility="gone" >
 
         <ProgressBar
             android:id="@+id/progressBar1"

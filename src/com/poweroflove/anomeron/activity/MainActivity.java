@@ -22,6 +22,7 @@ import com.poweroflove.anomeron.adapter.EntryArrayAdapter;
 import com.poweroflove.anomeron.adapter.EntryArrayAdapter.EntryArrayAdapterActionListener;
 import com.poweroflove.anomeron.model.Entry;
 import com.poweroflove.anomeron.service.AnoMeronService;
+import com.poweroflove.anomeron.util.HttpUtil;
 
 public class MainActivity extends SherlockListActivity implements
 		ActionBar.OnNavigationListener, EntryArrayAdapterActionListener {
@@ -33,25 +34,37 @@ public class MainActivity extends SherlockListActivity implements
 	private boolean mIsBound;
 	private AnoMeronService mBoundService;
 	
-	private List<Entry> mEntries;
+	private double nLong = 121.018379331;
+	private double nLat = 14.5590258956;
 	
+	private double pLong = 121.059101;
+	private double pLat = 14.585826;
+
+	private List<Entry> mEntries;
+
 	private BroadcastReceiver mBr = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context arg0, Intent arg1) {
 			String action = arg1.getAction();
-			
-			if(action.equals("refresh feed")) {
+
+			if (action.equals("refresh feed")) {
 				System.out.println("refresh");
 				mEntries.clear();
 				mEntries.addAll(Entry.getEntries());
 				System.out.println(mEntries);
 				mAdapter.notifyDataSetChanged();
+				mLv.setEmptyView(null);
+			}
+			else if (action.equals("reset feed")) {
+				System.out.println("reset");
+				mLv.setEmptyView(findViewById(R.id.empty));
+				mEntries.clear();
+				mAdapter.notifyDataSetChanged();
 			}
 		}
-		
+
 	};
-	
 
 	private ServiceConnection mConnection = new ServiceConnection() {
 		public void onServiceConnected(ComponentName className, IBinder service) {
@@ -85,14 +98,15 @@ public class MainActivity extends SherlockListActivity implements
 		mActionBar.setListNavigationCallbacks(list, this);
 
 		mLv = getListView();
+		mLv.setEmptyView(findViewById(R.id.empty));
 		mEntries = Entry.getEntries();
-		mAdapter = new EntryArrayAdapter(getApplicationContext(), 0,
-				mEntries);
+		mAdapter = new EntryArrayAdapter(getApplicationContext(), 0, mEntries);
 		mAdapter.mListener = this;
 		mLv.setAdapter(mAdapter);
-		
+
 		IntentFilter filter = new IntentFilter();
 		filter.addAction("refresh feed");
+		filter.addAction("reset feed");
 		registerReceiver(mBr, filter);
 	}
 
@@ -109,6 +123,7 @@ public class MainActivity extends SherlockListActivity implements
 		menu.add("Refresh").setIcon(R.drawable.ic_action_refresh)
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		menu.add("Search").setIcon(R.drawable.ic_action_search)
+				.setTitle("Search")
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		menu.add("Compose").setIcon(R.drawable.ic_action_compose)
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -116,8 +131,27 @@ public class MainActivity extends SherlockListActivity implements
 	}
 
 	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		String title = (String) item.getTitle();
+		if(title.equals("Search")) {
+			Intent i = new Intent(MainActivity.this, SearchActivity.class);
+			startActivity(i);
+		}
+		
+		return true;
+	}
+
+	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		// TODO Auto-generated method stub
+		switch(itemPosition) {
+		case 0:
+			HttpUtil.getFeeds(getApplicationContext(), nLong + "", nLat + "");
+			break;
+		case 1:
+			HttpUtil.getFeeds(getApplicationContext(), pLong + "", pLat + "");
+			break;
+		}
 		return false;
 	}
 

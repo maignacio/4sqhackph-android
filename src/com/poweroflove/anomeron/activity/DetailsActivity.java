@@ -49,6 +49,9 @@ public class DetailsActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
 		
+		mActionBar = getSupportActionBar();
+		mActionBar.setDisplayHomeAsUpEnabled(true);
+		
 		Intent i = getIntent();
 		mEntry = Entry.getEntryFromId(i.getLongExtra("id", -1));
 		
